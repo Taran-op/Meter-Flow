@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import TopNav from '../components/TopNav';
+
 
 const categories = [
   { id: 'all', name: 'All APIs' }, { id: 'weather', name: 'Weather' }, { id: 'payment', name: 'Payment' },
@@ -25,7 +25,7 @@ function Marketplace() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="consumer" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="mb-8"><h2 className="text-3xl font-bold text-text-primary">API Marketplace</h2><p className="text-text-secondary mt-1">Discover and integrate powerful APIs</p></div>
 

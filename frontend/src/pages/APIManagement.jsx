@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apisAPI } from '../services/api';
 import { useToast } from '../components/Toast';
-import TopNav from '../components/TopNav';
+
 
 function APIManagement() {
   const { addToast } = useToast();
@@ -19,7 +19,7 @@ function APIManagement() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="api_owner" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="flex justify-between items-center mb-8">
           <div><h2 className="text-3xl font-bold text-text-primary">My APIs</h2><p className="text-text-secondary mt-1">Create and manage your API endpoints</p></div>

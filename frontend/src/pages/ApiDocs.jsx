@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apisAPI } from '../services/api';
 import { useToast } from '../components/Toast';
-import TopNav from '../components/TopNav';
+
 
 function ApiDocs() {
   const { id } = useParams();
@@ -22,7 +22,7 @@ function ApiDocs() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="api_owner" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="flex items-center gap-4 mb-6"><Link to={`/apis/${id}`} className="flex items-center gap-2 text-[#4A97B0] hover:text-[#3A87A0] font-medium"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>Back to {api?.name}</Link></div>
         <div className="flex justify-between items-center mb-8">

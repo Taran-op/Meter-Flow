@@ -44,10 +44,10 @@ function TopNav({ role = 'consumer' }) {
 
   // Measure the active nav item and position the sliding indicator
   const updateIndicator = useCallback(() => {
-    const activeItem = navItems.find(item => isActive(item.path));
-    if (!activeItem || !navContainerRef.current) return;
+    if (!navContainerRef.current) return;
 
-    const el = navItemRefs.current[activeItem.path];
+    // Find the active ref by checking current pathname
+    const el = navItemRefs.current[location.pathname];
     if (!el) return;
 
     const containerRect = navContainerRef.current.getBoundingClientRect();
@@ -58,10 +58,12 @@ function TopNav({ role = 'consumer' }) {
       width: itemRect.width,
       opacity: 1,
     });
-  }, [location.pathname, navItems]);
+  }, [location.pathname]);
 
   useLayoutEffect(() => {
-    updateIndicator();
+    // Small delay to ensure DOM has rendered nav items
+    const timer = setTimeout(updateIndicator, 50);
+    return () => clearTimeout(timer);
   }, [updateIndicator]);
 
   // Also update on window resize

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apisAPI } from '../services/api';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip } from 'chart.js';
-import TopNav from '../components/TopNav';
+
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
@@ -19,7 +19,7 @@ function ConsumerDashboard() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="consumer" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="mb-8"><h2 className="text-3xl font-bold text-text-primary">Consumer Dashboard</h2><p className="text-text-secondary mt-1">Discover and manage API subscriptions</p></div>
 

@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { authAPI, adminAPI } from '../services/api';
 import { useToast } from '../components/Toast';
-import TopNav from '../components/TopNav';
 import NeuSelect from '../components/NeuSelect';
 
 function UserManagement() {
@@ -12,12 +11,12 @@ function UserManagement() {
   const deleteUserMutation = useMutation({ mutationFn: (id) => adminAPI.deleteUser(id), onSuccess: () => { addToast('Deleted', 'success'); queryClient.invalidateQueries(['allUsers']); }, onError: (e) => addToast(e.response?.data?.message || 'Failed', 'error') });
   const users = usersData?.users || [];
 
-  if (isLoading) return (<div className="min-h-screen bg-page-bg"><TopNav role="admin" /><div className="flex items-center justify-center h-64"><div className="animate-spin w-8 h-8 border-2 border-[#4A97B0] border-t-transparent rounded-full"></div></div></div>);
+  if (isLoading) return (<div className="min-h-screen bg-page-bg"><div className="flex items-center justify-center h-64"><div className="animate-spin w-8 h-8 border-2 border-[#4A97B0] border-t-transparent rounded-full"></div></div></div>);
 
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="admin" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="flex justify-between items-center mb-8">
           <div><h3 className="text-3xl font-bold text-text-primary">User Management</h3><p className="text-text-secondary mt-1">Manage platform users</p></div>

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apisAPI, authAPI } from '../services/api';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip } from 'chart.js';
-import TopNav from '../components/TopNav';
+
 import { Link } from 'react-router-dom';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Tooltip);
@@ -19,7 +19,7 @@ function AdminDashboard() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="admin" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="flex justify-between items-center mb-8">
           <div><h2 className="text-3xl font-bold text-text-primary">Admin Dashboard</h2><p className="text-text-secondary mt-1">Platform overview</p></div>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import TopNav from '../components/TopNav';
+
 
 const mockSubs = [
   { id: '1', name: 'Weather API', description: 'Real-time weather data', status: 'active', calls: 1250, limit: 5000, price: 'Free', apiKey: 'mf_live_xxxxxxxxxxxx' },
@@ -11,7 +11,7 @@ function Subscriptions() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="consumer" />
+
       <main className="flex-1 p-8 relative z-10 max-w-[1600px] mx-auto animate-fade-in">
         <div className="flex justify-between items-center mb-8">
           <div><h2 className="text-3xl font-bold text-text-primary">My Subscriptions</h2><p className="text-text-secondary mt-1">Manage API subscriptions and keys</p></div>

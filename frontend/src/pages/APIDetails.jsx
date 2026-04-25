@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apisAPI, usageAPI } from '../services/api';
-import TopNav from '../components/TopNav';
+
 
 function APIDetails() {
   const { id } = useParams();
@@ -20,7 +20,7 @@ function APIDetails() {
   return (
     <div className="min-h-screen bg-page-bg relative">
       <div className="ambient-blob w-[600px] h-[600px] bg-[#B7D8E6] -top-60 -right-60"></div>
-      <TopNav role="api_owner" />
+
       <main className="max-w-[1600px] mx-auto px-4 py-8 relative z-10 animate-fade-in">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
