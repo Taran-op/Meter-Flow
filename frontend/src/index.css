@@ -38,15 +38,16 @@ code {
    ══════════════════════════════════════════════ */
 @layer components {
 
-  /* ── Raised Card with Liquid Sheen ── */
+  /* ── Raised Card with Liquid Sheen + Beveled Depth ── */
   .neu-card {
     background: #E1E5EA;
     box-shadow:
       8px 8px 16px #b8bdc2,
       -8px -8px 16px #ffffff,
-      inset 0 1px 0 rgba(255,255,255,0.6);
+      inset 3px 3px 6px rgba(184, 189, 194, 0.35),
+      inset -3px -3px 6px rgba(255, 255, 255, 0.65);
     border-radius: 1.25rem;
-    border: 1px solid rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.4);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -58,10 +59,10 @@ code {
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.5) 0%,
-      rgba(183,216,230,0.12) 30%,
+      rgba(255,255,255,0.45) 0%,
+      rgba(183,216,230,0.1) 30%,
       transparent 55%,
-      rgba(255,255,255,0.08) 80%
+      rgba(255,255,255,0.06) 80%
     );
     border-radius: inherit;
     pointer-events: none;
@@ -75,21 +76,23 @@ code {
 
   .neu-card:hover {
     box-shadow:
-      10px 10px 20px #b8bdc2,
-      -10px -10px 20px #ffffff,
-      inset 0 1px 0 rgba(255,255,255,0.7);
+      10px 10px 22px #b8bdc2,
+      -10px -10px 22px #ffffff,
+      inset 2px 2px 5px rgba(184, 189, 194, 0.3),
+      inset -2px -2px 5px rgba(255, 255, 255, 0.6);
     transform: translateY(-3px);
   }
 
-  /* ── Static Card ── */
+  /* ── Static Card — same depth, no hover ── */
   .neu-card-static {
     background: #E1E5EA;
     box-shadow:
       8px 8px 16px #b8bdc2,
       -8px -8px 16px #ffffff,
-      inset 0 1px 0 rgba(255,255,255,0.6);
+      inset 3px 3px 6px rgba(184, 189, 194, 0.35),
+      inset -3px -3px 6px rgba(255, 255, 255, 0.65);
     border-radius: 1.25rem;
-    border: 1px solid rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.4);
     position: relative;
     overflow: hidden;
   }
@@ -100,8 +103,8 @@ code {
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.5) 0%,
-      rgba(183,216,230,0.12) 30%,
+      rgba(255,255,255,0.45) 0%,
+      rgba(183,216,230,0.1) 30%,
       transparent 55%
     );
     border-radius: inherit;
@@ -114,14 +117,16 @@ code {
     z-index: 2;
   }
 
-  /* ── Flat raised ── */
+  /* ── Flat raised with edge depth ── */
   .neu-flat {
     background: #E1E5EA;
     box-shadow:
       4px 4px 10px #b8bdc2,
-      -4px -4px 10px #ffffff;
+      -4px -4px 10px #ffffff,
+      inset 2px 2px 4px rgba(184, 189, 194, 0.3),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.6);
     border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.35);
     transition: all 0.25s ease;
   }
 
@@ -156,14 +161,16 @@ code {
     outline: none;
   }
 
-  /* ── Button ── */
+  /* ── Button with beveled edges ── */
   .neu-btn {
     background: linear-gradient(145deg, #edf2f7, #d5d9de);
     box-shadow:
       5px 5px 12px #b8bdc2,
-      -5px -5px 12px #ffffff;
+      -5px -5px 12px #ffffff,
+      inset 2px 2px 4px rgba(184, 189, 194, 0.25),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.55);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.4);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -173,7 +180,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 50%);
     border-radius: inherit;
     pointer-events: none;
   }
@@ -181,24 +188,27 @@ code {
   .neu-btn:hover {
     box-shadow:
       3px 3px 8px #b8bdc2,
-      -3px -3px 8px #ffffff;
+      -3px -3px 8px #ffffff,
+      inset 2px 2px 4px rgba(184, 189, 194, 0.2),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.5);
     transform: translateY(-1px);
   }
 
   .neu-btn:active {
     box-shadow:
-      inset 3px 3px 7px #b8bdc2,
-      inset -3px -3px 7px #ffffff;
+      inset 4px 4px 8px #b8bdc2,
+      inset -4px -4px 8px #ffffff;
     transform: translateY(0);
   }
 
-  /* ── Top Nav ── */
+  /* ── Top Nav with edge depth ── */
   .neu-topnav {
     background: #E1E5EA;
     box-shadow:
-      0 6px 16px #b8bdc2,
-      inset 0 1px 0 rgba(255,255,255,0.7);
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+      0 6px 18px #b8bdc2,
+      inset 0 2px 4px rgba(255, 255, 255, 0.6),
+      inset 0 -2px 4px rgba(184, 189, 194, 0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
     position: relative;
     overflow: hidden;
   }
@@ -207,7 +217,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 80%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -217,15 +227,16 @@ code {
     z-index: 1;
   }
 
-  /* ── Modal ── */
+  /* ── Modal with deep beveled edges ── */
   .neu-modal {
     background: #E1E5EA;
     box-shadow:
       16px 16px 40px #a0a5aa,
       -16px -16px 40px #ffffff,
-      inset 0 1px 0 rgba(255,255,255,0.7);
+      inset 4px 4px 8px rgba(184, 189, 194, 0.3),
+      inset -4px -4px 8px rgba(255, 255, 255, 0.6);
     border-radius: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,255,255,0.4);
     position: relative;
     overflow: hidden;
   }
@@ -234,7 +245,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 35%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, transparent 35%);
     border-radius: inherit;
     pointer-events: none;
     z-index: 1;
@@ -245,12 +256,14 @@ code {
     z-index: 2;
   }
 
-  /* ── Primary CTA ── */
+  /* ── Primary CTA with depth ── */
   .neu-btn-primary {
     background: linear-gradient(145deg, #5aadca, #3d8fa8);
     box-shadow:
       5px 5px 12px #b8bdc2,
-      -5px -5px 12px #ffffff;
+      -5px -5px 12px #ffffff,
+      inset 2px 2px 4px rgba(255, 255, 255, 0.2),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.08);
     color: white;
     border-radius: 0.75rem;
     border: 1px solid rgba(255,255,255,0.15);
@@ -263,7 +276,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%);
     border-radius: inherit;
     pointer-events: none;
   }
@@ -272,24 +285,29 @@ code {
     background: linear-gradient(145deg, #4da0bc, #35869e);
     box-shadow:
       3px 3px 8px #b8bdc2,
-      -3px -3px 8px #ffffff;
+      -3px -3px 8px #ffffff,
+      inset 2px 2px 4px rgba(255, 255, 255, 0.15),
+      inset -2px -2px 4px rgba(0, 0, 0, 0.06);
     transform: translateY(-1px) scale(1.02);
   }
 
   .neu-btn-primary:active {
-    box-shadow: inset 3px 3px 8px rgba(0,0,0,0.18);
+    box-shadow:
+      inset 4px 4px 10px rgba(0,0,0,0.2),
+      inset -2px -2px 6px rgba(255,255,255,0.1);
     transform: scale(0.97);
   }
 
-  /* ── Icon Container ── */
+  /* ── Icon Container with depth ── */
   .neu-icon {
     background: #E1E5EA;
     box-shadow:
       4px 4px 10px #b8bdc2,
       -4px -4px 10px #ffffff,
-      inset 0 1px 0 rgba(255,255,255,0.6);
+      inset 2px 2px 4px rgba(184, 189, 194, 0.25),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.55);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.45);
+    border: 1px solid rgba(255,255,255,0.35);
     position: relative;
     overflow: hidden;
   }
@@ -298,19 +316,21 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 55%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 55%);
     border-radius: inherit;
     pointer-events: none;
   }
 
-  /* ── Badge ── */
+  /* ── Badge with depth ── */
   .neu-badge {
     background: #E1E5EA;
     box-shadow:
       3px 3px 6px #b8bdc2,
-      -3px -3px 6px #ffffff;
+      -3px -3px 6px #ffffff,
+      inset 1px 1px 3px rgba(184, 189, 194, 0.2),
+      inset -1px -1px 3px rgba(255, 255, 255, 0.5);
     border-radius: 9999px;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.4);
   }
 
   /* ── Progress Well ── */
