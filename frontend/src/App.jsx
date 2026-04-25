@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastProvider } from './components/Toast';
+import PageTransition from './components/PageTransition';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -40,30 +41,40 @@ function RoleBasedDashboard() {
   }
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <PageTransition key={location.pathname}>
+      <Routes location={location}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<PrivateRoute><RoleBasedDashboard /></PrivateRoute>} />
+        <Route path="/apis" element={<PrivateRoute><APIManagement /></PrivateRoute>} />
+        <Route path="/apis/:id" element={<PrivateRoute><APIDetails /></PrivateRoute>} />
+        <Route path="/apis/:id/docs" element={<PrivateRoute><ApiDocs /></PrivateRoute>} />
+        <Route path="/billing" element={<PrivateRoute><Billing /></PrivateRoute>} />
+        {/* Admin routes */}
+        <Route path="/admin/users" element={<PrivateRoute><UserManagement /></PrivateRoute>} />
+        <Route path="/admin/apis" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        <Route path="/admin/billing" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        <Route path="/admin/analytics" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+        {/* Consumer routes */}
+        <Route path="/marketplace" element={<PrivateRoute><Marketplace /></PrivateRoute>} />
+        <Route path="/playground" element={<PrivateRoute><ApiPlayground /></PrivateRoute>} />
+        <Route path="/my-subscriptions" element={<PrivateRoute><Subscriptions /></PrivateRoute>} />
+        <Route path="/usage" element={<PrivateRoute><Usage /></PrivateRoute>} />
+      </Routes>
+    </PageTransition>
+  );
+}
+
 function App() {
   return (
     <ToastProvider>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/" element={<PrivateRoute><RoleBasedDashboard /></PrivateRoute>} />
-            <Route path="/apis" element={<PrivateRoute><APIManagement /></PrivateRoute>} />
-            <Route path="/apis/:id" element={<PrivateRoute><APIDetails /></PrivateRoute>} />
-            <Route path="/apis/:id/docs" element={<PrivateRoute><ApiDocs /></PrivateRoute>} />
-            <Route path="/billing" element={<PrivateRoute><Billing /></PrivateRoute>} />
-            {/* Admin routes */}
-            <Route path="/admin/users" element={<PrivateRoute><UserManagement /></PrivateRoute>} />
-            <Route path="/admin/apis" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-            <Route path="/admin/billing" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-            <Route path="/admin/analytics" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-            {/* Consumer routes */}
-            <Route path="/marketplace" element={<PrivateRoute><Marketplace /></PrivateRoute>} />
-            <Route path="/playground" element={<PrivateRoute><ApiPlayground /></PrivateRoute>} />
-            <Route path="/my-subscriptions" element={<PrivateRoute><Subscriptions /></PrivateRoute>} />
-            <Route path="/usage" element={<PrivateRoute><Usage /></PrivateRoute>} />
-          </Routes>
+          <AnimatedRoutes />
         </BrowserRouter>
       </QueryClientProvider>
     </ToastProvider>

@@ -31,7 +31,7 @@ function ConsumerDashboard() {
           <div className="neu-progress-well h-3"><div className="bg-gradient-to-r from-[#4A97B0] to-[#7BB8CC] h-3 rounded-full transition-all duration-500" style={{ width: `${usagePercent}%` }}></div></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 stagger-in">
           {[
             { label: 'Active Subscriptions', value: subscriptions.length, icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', color: 'text-sky-500' },
             { label: 'Total API Calls', value: totalCalls.toLocaleString(), icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z', color: 'text-[#4A97B0]' },

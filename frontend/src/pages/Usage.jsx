@@ -32,7 +32,7 @@ function Usage() {
           <div className="flex justify-between text-sm text-text-secondary"><span>{stats.percent}% used</span><span>{(stats.limit - stats.calls).toLocaleString()} remaining</span></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 stagger-in">
           {[{ l: 'Success Rate', v: '98.5%' }, { l: 'Avg Response', v: '45ms' }, { l: 'Peak Time', v: '2:00 PM' }, { l: 'Uptime', v: '99.9%' }].map((s, i) => (
             <div key={i} className="neu-card p-6"><p className="text-text-secondary text-sm mb-1">{s.l}</p><p className="text-2xl font-bold text-text-primary">{s.v}</p></div>
           ))}
