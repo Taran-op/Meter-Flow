@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { authAPI, adminAPI } from '../services/api';
 import { useToast } from '../components/Toast';
 import TopNav from '../components/TopNav';
+import NeuSelect from '../components/NeuSelect';
 
 function UserManagement() {
   const { addToast } = useToast();
@@ -37,7 +38,7 @@ function UserManagement() {
                   <tr key={u._id} className="hover:bg-surface-alt/50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap"><div className="flex items-center gap-3"><div className="w-10 h-10 neu-icon flex items-center justify-center text-[#4A97B0] font-medium">{u.name?.charAt(0).toUpperCase()}</div><span className="text-text-primary font-medium">{u.name}</span></div></td>
                     <td className="px-6 py-4 text-text-secondary">{u.email}</td>
-                    <td className="px-6 py-4"><select value={u.role} onChange={(e) => updateRoleMutation.mutate({ userId: u._id, role: e.target.value })} className={`neu-select px-3 py-1.5 text-sm font-medium ${u.role === 'api_owner' ? 'text-emerald-600' : u.role === 'consumer' ? 'text-sky-600' : 'text-purple-600'}`}><option value="api_owner">API Owner</option><option value="consumer">Consumer</option></select></td>
+                    <td className="px-6 py-4"><NeuSelect value={u.role} onChange={(val) => updateRoleMutation.mutate({ userId: u._id, role: val })} options={[{ value: 'api_owner', label: 'API Owner' }, { value: 'consumer', label: 'Consumer' }]} className="w-40" /></td>
                     <td className="px-6 py-4 text-text-secondary text-sm">{u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</td>
                     <td className="px-6 py-4 text-right"><button onClick={() => { if (window.confirm('Delete user?')) deleteUserMutation.mutate(u._id); }} className="p-2 text-error/70 hover:text-error neu-btn"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></td>
                   </tr>

@@ -36,8 +36,12 @@ function NeuSelect({ value, onChange, options = [], className = '', placeholder 
 
       {/* Dropdown panel */}
       {isOpen && (
-        <div className="absolute z-50 mt-2 w-full min-w-[160px] neu-card-static py-2 animate-fade-in"
-             style={{ boxShadow: '8px 8px 20px #bec3c8, -8px -8px 20px #ffffff' }}>
+        <div className="absolute z-50 mt-2 w-full min-w-[160px] py-2 rounded-xl animate-fade-in"
+             style={{ 
+               background: '#E1E5EA', 
+               boxShadow: '8px 8px 20px #bec3c8, -8px -8px 20px #ffffff',
+               border: '1px solid rgba(255,255,255,0.5)'
+             }}>
           {options.map((opt) => (
             <button
               key={opt.value}

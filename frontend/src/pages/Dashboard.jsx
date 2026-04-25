@@ -5,6 +5,7 @@ import { apisAPI, usageAPI } from '../services/api';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip } from 'chart.js';
 import TopNav from '../components/TopNav';
+import NeuSelect from '../components/NeuSelect';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
@@ -53,9 +54,13 @@ function Dashboard() {
         <div className="neu-card-static p-6 mb-8">
           <div className="flex justify-between items-center mb-6">
             <div><h3 className="text-lg font-semibold text-text-primary">Requests / Hour</h3><p className="text-text-secondary text-sm mt-1">API call volume over time</p></div>
-            <select value={selectedApi?._id || ''} onChange={(e) => setSelectedApi(apis.find(a => a._id === e.target.value))} className="neu-select px-4 py-2 text-text-primary text-sm">
-              {apis.map(api => (<option key={api._id} value={api._id}>{api.name}</option>))}
-            </select>
+            <NeuSelect
+              value={selectedApi?._id || ''}
+              onChange={(val) => setSelectedApi(apis.find(a => a._id === val))}
+              options={apis.map(api => ({ value: api._id, label: api.name }))}
+              className="w-48"
+              placeholder="Select API"
+            />
           </div>
           <div className="h-64">{isLoading ? (<div className="flex items-center justify-center h-full text-text-secondary"><svg className="animate-spin w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Loading...</div>) : (<Line data={chartData} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }} />)}</div>
         </div>

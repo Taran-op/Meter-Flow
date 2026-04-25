@@ -5,6 +5,7 @@ import { apisAPI, usageAPI } from '../services/api';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip } from 'chart.js';
 import TopNav from '../components/TopNav';
+import NeuSelect from '../components/NeuSelect';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
 
@@ -24,9 +25,13 @@ function Billing() {
 
         <div className="neu-card-static p-6 mb-6">
           <label className="block text-sm font-medium text-text-secondary mb-3">Select API</label>
-          <select value={selectedApi} onChange={(e) => setSelectedApi(e.target.value)} className="w-full md:w-64 px-4 py-3 neu-select text-text-primary">
-            <option value="">Select an API</option>{apis.map(a => (<option key={a._id} value={a._id}>{a.name}</option>))}
-          </select>
+          <NeuSelect
+            value={selectedApi}
+            onChange={(val) => setSelectedApi(val)}
+            options={[{ value: '', label: 'Select an API' }, ...apis.map(a => ({ value: a._id, label: a.name }))]}
+            className="w-full md:w-64"
+            placeholder="Select an API"
+          />
         </div>
 
         {!selectedApi ? (

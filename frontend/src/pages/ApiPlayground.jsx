@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TopNav from '../components/TopNav';
+import NeuSelect from '../components/NeuSelect';
 
 const sampleAPIs = [
   { id: '1', name: 'Weather API', baseUrl: 'https://api.weather.com/v1', endpoints: ['/current', '/forecast', '/history'] },
@@ -35,12 +36,18 @@ function ApiPlayground() {
           <div className="lg:col-span-2 space-y-6">
             <div className="neu-card-static p-6">
               <div className="flex gap-3 mb-4">
-                <select value={selectedApi.id} onChange={(e) => setSelectedApi(sampleAPIs.find(a => a.id === e.target.value))} className="flex-1 px-4 py-3 neu-select text-text-primary">
-                  {sampleAPIs.map(a => (<option key={a.id} value={a.id}>{a.name}</option>))}
-                </select>
-                <select value={method} onChange={(e) => setMethod(e.target.value)} className="px-4 py-3 neu-select text-text-primary font-medium text-sm">
-                  {['GET','POST','PUT','DELETE','PATCH'].map(m => (<option key={m} value={m}>{m}</option>))}
-                </select>
+                <NeuSelect
+                  value={selectedApi.id}
+                  onChange={(val) => setSelectedApi(sampleAPIs.find(a => a.id === val))}
+                  options={sampleAPIs.map(a => ({ value: a.id, label: a.name }))}
+                  className="flex-1"
+                />
+                <NeuSelect
+                  value={method}
+                  onChange={(val) => setMethod(val)}
+                  options={['GET','POST','PUT','DELETE','PATCH'].map(m => ({ value: m, label: m }))}
+                  className="w-36"
+                />
               </div>
               <div className="flex gap-3">
                 <input type="text" value={endpoint} onChange={(e) => setEndpoint(e.target.value)} className="flex-1 px-4 py-3 neu-input text-text-primary font-mono text-sm" placeholder="/endpoint" />
