@@ -1,8 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
 
 function TopNav({ role = 'consumer' }) {
   const location = useLocation();
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const navContainerRef = useRef(null);
+  const navItemRefs = useRef({});
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
 
   const handleLogout = () => {
     localStorage.clear();
@@ -37,6 +41,35 @@ function TopNav({ role = 'consumer' }) {
   };
 
   const navItems = getNavItems();
+
+  // Measure the active nav item and position the sliding indicator
+  const updateIndicator = useCallback(() => {
+    const activeItem = navItems.find(item => isActive(item.path));
+    if (!activeItem || !navContainerRef.current) return;
+
+    const el = navItemRefs.current[activeItem.path];
+    if (!el) return;
+
+    const containerRect = navContainerRef.current.getBoundingClientRect();
+    const itemRect = el.getBoundingClientRect();
+
+    setIndicator({
+      left: itemRect.left - containerRect.left,
+      width: itemRect.width,
+      opacity: 1,
+    });
+  }, [location.pathname, navItems]);
+
+  useLayoutEffect(() => {
+    updateIndicator();
+  }, [updateIndicator]);
+
+  // Also update on window resize
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator]);
+
   const roleBadges = {
     admin: { label: 'Admin', cls: 'text-purple-700' },
     api_owner: { label: 'API Owner', cls: 'text-emerald-700' },
@@ -57,16 +90,34 @@ function TopNav({ role = 'consumer' }) {
           <span className="text-lg font-bold text-text-primary tracking-tight">MeterFlow</span>
         </Link>
 
-        {/* Nav Links */}
-        <div className="flex items-center gap-1 overflow-x-auto">
+        {/* Nav Links with Sliding Indicator */}
+        <div
+          ref={navContainerRef}
+          className="flex items-center gap-1 overflow-x-auto relative"
+        >
+          {/* Sliding pill indicator */}
+          <div
+            className="absolute top-0 h-full rounded-xl pointer-events-none"
+            style={{
+              left: indicator.left,
+              width: indicator.width,
+              opacity: indicator.opacity,
+              background: '#E1E5EA',
+              boxShadow: 'inset 4px 4px 8px #b8bdc2, inset -4px -4px 8px #ffffff',
+              border: '1px solid rgba(255,255,255,0.15)',
+              transition: 'left 0.4s cubic-bezier(0.4, 0, 0.15, 1), width 0.35s cubic-bezier(0.4, 0, 0.15, 1), opacity 0.3s ease',
+            }}
+          />
+
           {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+              ref={(el) => { navItemRefs.current[item.path] = el; }}
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-colors duration-300 relative z-10 ${
                 isActive(item.path)
-                  ? 'neu-inset text-[#4A97B0]'
-                  : 'text-text-secondary hover:text-text-primary hover:shadow-neu-sm'
+                  ? 'text-[#4A97B0]'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
