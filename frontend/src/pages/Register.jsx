@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authAPI } from '../services/api';
+import { useTheme } from '../context/ThemeContext';
 
 function Register() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'consumer' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +31,22 @@ function Register() {
     <div className="min-h-screen flex items-center justify-center bg-page-bg relative overflow-hidden">
       <div className="ambient-blob w-[500px] h-[500px] bg-[#B7D8E6] -top-40 -right-40"></div>
       <div className="ambient-blob w-[400px] h-[400px] bg-[#CDD2D8] -bottom-32 -left-32"></div>
+
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleTheme}
+        className="fixed top-5 right-5 z-50 theme-toggle"
+        title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-label="Toggle theme"
+      >
+        <div className="theme-toggle-knob">
+          {isDark ? (
+            <svg className="w-3.5 h-3.5 text-[#5aadca]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+          ) : (
+            <svg className="w-3.5 h-3.5 text-[#E8A642]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          )}
+        </div>
+      </button>
 
       <div className="relative w-full max-w-md p-8 neu-modal animate-fade-in">
         <div className="text-center mb-8">

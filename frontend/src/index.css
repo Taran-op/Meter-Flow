@@ -7,8 +7,10 @@
 :root {
   --c-bg: #E1E5EA;
   --c-surface: #E1E5EA;
+  --c-surface-alt: #dde1e6;
   --neu-dark: #b8bdc2;
   --neu-light: #ffffff;
+  --neu-dark-strong: #a0a5aa;
   --c-accent: #B7D8E6;
   --c-accent-dark: #7BB8CC;
   --c-accent-deep: #4A97B0;
@@ -19,6 +21,79 @@
   --c-success: #3DAA7A;
   --c-error: #D95252;
   --c-warning: #E8A642;
+  --c-btn-grad-from: #edf2f7;
+  --c-btn-grad-to: #d5d9de;
+  --c-btn-primary-from: #5aadca;
+  --c-btn-primary-to: #3d8fa8;
+  --c-btn-primary-hover-from: #4da0bc;
+  --c-btn-primary-hover-to: #35869e;
+  --c-overlay: rgba(0,0,0,0.20);
+  --c-sheen-white: rgba(255,255,255,0.45);
+  --c-sheen-accent: rgba(183,216,230,0.1);
+  --c-sheen-subtle: rgba(255,255,255,0.06);
+  --c-border-white: rgba(255,255,255,0.4);
+  --c-border-white-dim: rgba(255,255,255,0.35);
+  --c-border-white-bright: rgba(255,255,255,0.5);
+  --c-border-white-faint: rgba(255,255,255,0.15);
+  --c-inset-dark: rgba(184,189,194,0.35);
+  --c-inset-light: rgba(255,255,255,0.65);
+  --c-blob-accent: #B7D8E6;
+  --c-blob-border: #CDD2D8;
+  --c-select-option-bg: #E1E5EA;
+  --c-scrollbar-thumb: #c0c5ca;
+  --c-code-color: #4A97B0;
+
+  /* Transition for theme switch */
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --c-bg: #1a1d23;
+  --c-surface: #1a1d23;
+  --c-surface-alt: #22262d;
+  --neu-dark: #111318;
+  --neu-light: #24282f;
+  --neu-dark-strong: #0d0f13;
+  --c-accent: #2a4a5a;
+  --c-accent-dark: #5a9ab0;
+  --c-accent-deep: #5aadca;
+  --c-text-primary: #e2e8f0;
+  --c-text-secondary: #94a3b8;
+  --c-text-muted: #64748b;
+  --c-border: #2d3240;
+  --c-success: #4ade80;
+  --c-error: #f87171;
+  --c-warning: #fbbf24;
+  --c-btn-grad-from: #24282f;
+  --c-btn-grad-to: #1a1d23;
+  --c-btn-primary-from: #4a9ab5;
+  --c-btn-primary-to: #357a90;
+  --c-btn-primary-hover-from: #5aadca;
+  --c-btn-primary-hover-to: #4a9ab5;
+  --c-overlay: rgba(0,0,0,0.50);
+  --c-sheen-white: rgba(255,255,255,0.04);
+  --c-sheen-accent: rgba(90,173,202,0.06);
+  --c-sheen-subtle: rgba(255,255,255,0.02);
+  --c-border-white: rgba(255,255,255,0.06);
+  --c-border-white-dim: rgba(255,255,255,0.05);
+  --c-border-white-bright: rgba(255,255,255,0.08);
+  --c-border-white-faint: rgba(255,255,255,0.04);
+  --c-inset-dark: rgba(0,0,0,0.35);
+  --c-inset-light: rgba(255,255,255,0.04);
+  --c-blob-accent: rgba(90,173,202,0.15);
+  --c-blob-border: rgba(45,50,64,0.5);
+  --c-select-option-bg: #1a1d23;
+  --c-scrollbar-thumb: #3a3f4a;
+  --c-code-color: #5aadca;
+
+  color-scheme: dark;
+}
+
+/* Smooth theme transition */
+body, .neu-card, .neu-card-static, .neu-flat, .neu-inset, .neu-input,
+.neu-btn, .neu-btn-primary, .neu-topnav, .neu-modal, .neu-icon,
+.neu-badge, .neu-progress-well, .neu-select {
+  transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, color 0.35s ease;
 }
 
 body {
@@ -40,14 +115,14 @@ code {
 
   /* ── Raised Card with Liquid Sheen + Beveled Depth ── */
   .neu-card {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      8px 8px 16px #b8bdc2,
-      -8px -8px 16px #ffffff,
-      inset 3px 3px 6px rgba(184, 189, 194, 0.35),
-      inset -3px -3px 6px rgba(255, 255, 255, 0.65);
+      8px 8px 16px var(--neu-dark),
+      -8px -8px 16px var(--neu-light),
+      inset 3px 3px 6px var(--c-inset-dark),
+      inset -3px -3px 6px var(--c-inset-light);
     border-radius: 1.25rem;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid var(--c-border-white);
     position: relative;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -59,10 +134,10 @@ code {
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.45) 0%,
-      rgba(183,216,230,0.1) 30%,
+      var(--c-sheen-white) 0%,
+      var(--c-sheen-accent) 30%,
       transparent 55%,
-      rgba(255,255,255,0.06) 80%
+      var(--c-sheen-subtle) 80%
     );
     border-radius: inherit;
     pointer-events: none;
@@ -76,23 +151,23 @@ code {
 
   .neu-card:hover {
     box-shadow:
-      10px 10px 22px #b8bdc2,
-      -10px -10px 22px #ffffff,
-      inset 2px 2px 5px rgba(184, 189, 194, 0.3),
-      inset -2px -2px 5px rgba(255, 255, 255, 0.6);
+      10px 10px 22px var(--neu-dark),
+      -10px -10px 22px var(--neu-light),
+      inset 2px 2px 5px var(--c-inset-dark),
+      inset -2px -2px 5px var(--c-inset-light);
     transform: translateY(-3px);
   }
 
   /* ── Static Card — same depth, no hover ── */
   .neu-card-static {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      8px 8px 16px #b8bdc2,
-      -8px -8px 16px #ffffff,
-      inset 3px 3px 6px rgba(184, 189, 194, 0.35),
-      inset -3px -3px 6px rgba(255, 255, 255, 0.65);
+      8px 8px 16px var(--neu-dark),
+      -8px -8px 16px var(--neu-light),
+      inset 3px 3px 6px var(--c-inset-dark),
+      inset -3px -3px 6px var(--c-inset-light);
     border-radius: 1.25rem;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid var(--c-border-white);
     position: relative;
     overflow: hidden;
   }
@@ -103,8 +178,8 @@ code {
     inset: 0;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.45) 0%,
-      rgba(183,216,230,0.1) 30%,
+      var(--c-sheen-white) 0%,
+      var(--c-sheen-accent) 30%,
       transparent 55%
     );
     border-radius: inherit;
@@ -119,43 +194,44 @@ code {
 
   /* ── Flat raised with edge depth ── */
   .neu-flat {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      4px 4px 10px #b8bdc2,
-      -4px -4px 10px #ffffff,
-      inset 2px 2px 4px rgba(184, 189, 194, 0.3),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.6);
+      4px 4px 10px var(--neu-dark),
+      -4px -4px 10px var(--neu-light),
+      inset 2px 2px 4px var(--c-inset-dark),
+      inset -2px -2px 4px var(--c-inset-light);
     border-radius: 1rem;
-    border: 1px solid rgba(255,255,255,0.35);
+    border: 1px solid var(--c-border-white-dim);
     transition: all 0.25s ease;
   }
 
   /* ── Inset / Pressed ── */
   .neu-inset {
-    background: #dde1e6;
+    background: var(--c-surface-alt);
     box-shadow:
-      inset 4px 4px 10px #b8bdc2,
-      inset -4px -4px 10px #ffffff;
+      inset 4px 4px 10px var(--neu-dark),
+      inset -4px -4px 10px var(--neu-light);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--c-border-white-faint);
   }
 
   /* ── Input ── */
   .neu-input {
-    background: #dde1e6;
+    background: var(--c-surface-alt);
     box-shadow:
-      inset 3px 3px 7px #b8bdc2,
-      inset -3px -3px 7px #ffffff;
-    border: 1px solid rgba(255,255,255,0.25);
+      inset 3px 3px 7px var(--neu-dark),
+      inset -3px -3px 7px var(--neu-light);
+    border: 1px solid var(--c-border-white-faint);
     border-radius: 0.75rem;
     transition: all 0.3s ease;
     padding: 0.75rem 1rem;
+    color: var(--c-text-primary);
   }
 
   .neu-input:focus {
     box-shadow:
-      inset 3px 3px 7px #b8bdc2,
-      inset -3px -3px 7px #ffffff,
+      inset 3px 3px 7px var(--neu-dark),
+      inset -3px -3px 7px var(--neu-light),
       0 0 0 3px rgba(74, 151, 176, 0.25);
     border-color: var(--c-accent-dark);
     outline: none;
@@ -163,14 +239,14 @@ code {
 
   /* ── Button with beveled edges ── */
   .neu-btn {
-    background: linear-gradient(145deg, #edf2f7, #d5d9de);
+    background: linear-gradient(145deg, var(--c-btn-grad-from), var(--c-btn-grad-to));
     box-shadow:
-      5px 5px 12px #b8bdc2,
-      -5px -5px 12px #ffffff,
-      inset 2px 2px 4px rgba(184, 189, 194, 0.25),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.55);
+      5px 5px 12px var(--neu-dark),
+      -5px -5px 12px var(--neu-light),
+      inset 2px 2px 4px var(--c-inset-dark),
+      inset -2px -2px 4px var(--c-inset-light);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid var(--c-border-white);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -180,35 +256,35 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, transparent 50%);
+    background: linear-gradient(135deg, var(--c-sheen-white) 0%, transparent 50%);
     border-radius: inherit;
     pointer-events: none;
   }
 
   .neu-btn:hover {
     box-shadow:
-      3px 3px 8px #b8bdc2,
-      -3px -3px 8px #ffffff,
-      inset 2px 2px 4px rgba(184, 189, 194, 0.2),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+      3px 3px 8px var(--neu-dark),
+      -3px -3px 8px var(--neu-light),
+      inset 2px 2px 4px var(--c-inset-dark),
+      inset -2px -2px 4px var(--c-inset-light);
     transform: translateY(-1px);
   }
 
   .neu-btn:active {
     box-shadow:
-      inset 4px 4px 8px #b8bdc2,
-      inset -4px -4px 8px #ffffff;
+      inset 4px 4px 8px var(--neu-dark),
+      inset -4px -4px 8px var(--neu-light);
     transform: translateY(0);
   }
 
   /* ── Top Nav with edge depth ── */
   .neu-topnav {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      0 6px 18px #b8bdc2,
-      inset 0 2px 4px rgba(255, 255, 255, 0.6),
-      inset 0 -2px 4px rgba(184, 189, 194, 0.2);
-    border-bottom: 1px solid rgba(255,255,255,0.4);
+      0 6px 18px var(--neu-dark),
+      inset 0 2px 4px var(--c-inset-light),
+      inset 0 -2px 4px var(--c-inset-dark);
+    border-bottom: 1px solid var(--c-border-white);
     position: relative;
     overflow: hidden;
   }
@@ -217,7 +293,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 70%);
+    background: linear-gradient(180deg, var(--c-sheen-white) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -229,14 +305,14 @@ code {
 
   /* ── Modal with deep beveled edges ── */
   .neu-modal {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      16px 16px 40px #a0a5aa,
-      -16px -16px 40px #ffffff,
-      inset 4px 4px 8px rgba(184, 189, 194, 0.3),
-      inset -4px -4px 8px rgba(255, 255, 255, 0.6);
+      16px 16px 40px var(--neu-dark-strong),
+      -16px -16px 40px var(--neu-light),
+      inset 4px 4px 8px var(--c-inset-dark),
+      inset -4px -4px 8px var(--c-inset-light);
     border-radius: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid var(--c-border-white);
     position: relative;
     overflow: hidden;
   }
@@ -245,7 +321,7 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, transparent 35%);
+    background: linear-gradient(135deg, var(--c-sheen-white) 0%, transparent 35%);
     border-radius: inherit;
     pointer-events: none;
     z-index: 1;
@@ -258,15 +334,15 @@ code {
 
   /* ── Primary CTA with depth ── */
   .neu-btn-primary {
-    background: linear-gradient(145deg, #5aadca, #3d8fa8);
+    background: linear-gradient(145deg, var(--c-btn-primary-from), var(--c-btn-primary-to));
     box-shadow:
-      5px 5px 12px #b8bdc2,
-      -5px -5px 12px #ffffff,
+      5px 5px 12px var(--neu-dark),
+      -5px -5px 12px var(--neu-light),
       inset 2px 2px 4px rgba(255, 255, 255, 0.2),
       inset -2px -2px 4px rgba(0, 0, 0, 0.08);
     color: white;
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--c-border-white-faint);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -282,10 +358,10 @@ code {
   }
 
   .neu-btn-primary:hover {
-    background: linear-gradient(145deg, #4da0bc, #35869e);
+    background: linear-gradient(145deg, var(--c-btn-primary-hover-from), var(--c-btn-primary-hover-to));
     box-shadow:
-      3px 3px 8px #b8bdc2,
-      -3px -3px 8px #ffffff,
+      3px 3px 8px var(--neu-dark),
+      -3px -3px 8px var(--neu-light),
       inset 2px 2px 4px rgba(255, 255, 255, 0.15),
       inset -2px -2px 4px rgba(0, 0, 0, 0.06);
     transform: translateY(-1px) scale(1.02);
@@ -300,14 +376,14 @@ code {
 
   /* ── Icon Container with depth ── */
   .neu-icon {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      4px 4px 10px #b8bdc2,
-      -4px -4px 10px #ffffff,
-      inset 2px 2px 4px rgba(184, 189, 194, 0.25),
-      inset -2px -2px 4px rgba(255, 255, 255, 0.55);
+      4px 4px 10px var(--neu-dark),
+      -4px -4px 10px var(--neu-light),
+      inset 2px 2px 4px var(--c-inset-dark),
+      inset -2px -2px 4px var(--c-inset-light);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.35);
+    border: 1px solid var(--c-border-white-dim);
     position: relative;
     overflow: hidden;
   }
@@ -316,41 +392,41 @@ code {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 55%);
+    background: linear-gradient(135deg, var(--c-sheen-white) 0%, transparent 55%);
     border-radius: inherit;
     pointer-events: none;
   }
 
   /* ── Badge with depth ── */
   .neu-badge {
-    background: #E1E5EA;
+    background: var(--c-surface);
     box-shadow:
-      3px 3px 6px #b8bdc2,
-      -3px -3px 6px #ffffff,
-      inset 1px 1px 3px rgba(184, 189, 194, 0.2),
-      inset -1px -1px 3px rgba(255, 255, 255, 0.5);
+      3px 3px 6px var(--neu-dark),
+      -3px -3px 6px var(--neu-light),
+      inset 1px 1px 3px var(--c-inset-dark),
+      inset -1px -1px 3px var(--c-inset-light);
     border-radius: 9999px;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid var(--c-border-white);
   }
 
   /* ── Progress Well ── */
   .neu-progress-well {
-    background: #dde1e6;
+    background: var(--c-surface-alt);
     box-shadow:
-      inset 3px 3px 7px #b8bdc2,
-      inset -3px -3px 7px #ffffff;
+      inset 3px 3px 7px var(--neu-dark),
+      inset -3px -3px 7px var(--neu-light);
     border-radius: 9999px;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid var(--c-border-white-faint);
   }
 
   /* ── Select (raised) ── */
   .neu-select {
-    background: linear-gradient(145deg, #edf2f7, #d5d9de);
+    background: linear-gradient(145deg, var(--c-btn-grad-from), var(--c-btn-grad-to));
     box-shadow:
-      5px 5px 12px #b8bdc2,
-      -5px -5px 12px #ffffff;
+      5px 5px 12px var(--neu-dark),
+      -5px -5px 12px var(--neu-light);
     border-radius: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid var(--c-border-white-bright);
     transition: all 0.25s ease;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -428,7 +504,7 @@ code {
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--c-bg); }
-::-webkit-scrollbar-thumb { background: #c0c5ca; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--c-scrollbar-thumb); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--c-accent-dark); }
 
 /* ─── Toast ─── */
@@ -448,6 +524,10 @@ code {
   opacity: 0.2;
 }
 
+[data-theme="dark"] .ambient-blob {
+  opacity: 0.08;
+}
+
 /* ─── Select fallback ─── */
 select {
   -webkit-appearance: none;
@@ -456,8 +536,45 @@ select {
   cursor: pointer;
 }
 select option {
-  background: #E1E5EA;
+  background: var(--c-select-option-bg);
   color: var(--c-text-primary);
   padding: 8px 12px;
   font-weight: 500;
+}
+
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: var(--c-surface-alt);
+  box-shadow:
+    inset 2px 2px 5px var(--neu-dark),
+    inset -2px -2px 5px var(--neu-light);
+  transition: all 0.35s ease;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--c-btn-grad-from), var(--c-btn-grad-to));
+  box-shadow:
+    2px 2px 5px var(--neu-dark),
+    -2px -2px 5px var(--neu-light);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.15, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .theme-toggle-knob {
+  transform: translateX(24px);
 }

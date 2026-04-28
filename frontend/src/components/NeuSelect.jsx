@@ -54,21 +54,21 @@ function NeuSelect({ value, onChange, options = [], className = '', placeholder 
         className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left text-sm font-medium transition-all rounded-xl"
         style={{
           background: isOpen
-            ? '#E1E5EA'
-            : 'linear-gradient(145deg, #eaeff4, #d6dae0)',
+            ? 'var(--c-surface)'
+            : 'linear-gradient(145deg, var(--c-btn-grad-from), var(--c-btn-grad-to))',
           boxShadow: isOpen
-            ? 'inset 3px 3px 6px #bec3c8, inset -3px -3px 6px #ffffff'
-            : '4px 4px 10px #bec3c8, -4px -4px 10px #ffffff',
-          border: '1px solid rgba(255,255,255,0.4)',
-          color: '#1A2633',
+            ? 'inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light)'
+            : '4px 4px 10px var(--neu-dark), -4px -4px 10px var(--neu-light)',
+          border: '1px solid var(--c-border-white)',
+          color: 'var(--c-text-primary)',
         }}
       >
-        <span className={`truncate ${selected ? '' : 'text-[#8A97A4]'}`}>
+        <span className={`truncate ${selected ? '' : 'opacity-50'}`} style={{ color: selected ? 'var(--c-text-primary)' : 'var(--c-text-muted)' }}>
           {selected?.label || placeholder}
         </span>
         <svg
           className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-          style={{ color: '#4A97B0' }}
+          style={{ color: 'var(--c-accent-deep)' }}
           fill="none" stroke="currentColor" viewBox="0 0 24 24"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
@@ -85,9 +85,9 @@ function NeuSelect({ value, onChange, options = [], className = '', placeholder 
             left: pos.left,
             width: pos.width,
             zIndex: 9999,
-            background: '#E1E5EA',
-            boxShadow: '8px 8px 24px #a8adb2, -8px -8px 24px #ffffff',
-            border: '1px solid rgba(255,255,255,0.5)',
+            background: 'var(--c-surface)',
+            boxShadow: '8px 8px 24px var(--neu-dark-strong), -8px -8px 24px var(--neu-light)',
+            border: '1px solid var(--c-border-white-bright)',
             borderRadius: '0.75rem',
             padding: '6px 0',
             animation: 'fadeIn 0.15s ease-out',
@@ -106,23 +106,23 @@ function NeuSelect({ value, onChange, options = [], className = '', placeholder 
                 padding: '10px 16px',
                 fontSize: '0.875rem',
                 fontWeight: opt.value === value ? '600' : '500',
-                color: opt.value === value ? '#4A97B0' : '#1A2633',
-                background: opt.value === value ? 'rgba(183,216,230,0.25)' : 'transparent',
+                color: opt.value === value ? 'var(--c-accent-deep)' : 'var(--c-text-primary)',
+                background: opt.value === value ? 'var(--c-sheen-accent)' : 'transparent',
                 border: 'none',
                 cursor: 'pointer',
                 textAlign: 'left',
                 transition: 'background 0.15s',
               }}
               onMouseEnter={(e) => {
-                if (opt.value !== value) e.currentTarget.style.background = 'rgba(255,255,255,0.4)';
+                if (opt.value !== value) e.currentTarget.style.background = 'var(--c-sheen-white)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = opt.value === value ? 'rgba(183,216,230,0.25)' : 'transparent';
+                e.currentTarget.style.background = opt.value === value ? 'var(--c-sheen-accent)' : 'transparent';
               }}
             >
               <span>{opt.label}</span>
               {opt.value === value && (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A97B0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-accent-deep)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               )}

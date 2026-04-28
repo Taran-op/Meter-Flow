@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 function TopNav({ role = 'consumer' }) {
   const location = useLocation();
@@ -7,6 +8,7 @@ function TopNav({ role = 'consumer' }) {
   const navContainerRef = useRef(null);
   const navItemRefs = useRef({});
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+  const { isDark, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -45,14 +47,10 @@ function TopNav({ role = 'consumer' }) {
   // Measure the active nav item and position the sliding indicator
   const updateIndicator = useCallback(() => {
     if (!navContainerRef.current) return;
-
-    // Find the active ref by checking current pathname
     const el = navItemRefs.current[location.pathname];
     if (!el) return;
-
     const containerRect = navContainerRef.current.getBoundingClientRect();
     const itemRect = el.getBoundingClientRect();
-
     setIndicator({
       left: itemRect.left - containerRect.left,
       width: itemRect.width,
@@ -61,21 +59,19 @@ function TopNav({ role = 'consumer' }) {
   }, [location.pathname]);
 
   useLayoutEffect(() => {
-    // Small delay to ensure DOM has rendered nav items
     const timer = setTimeout(updateIndicator, 50);
     return () => clearTimeout(timer);
   }, [updateIndicator]);
 
-  // Also update on window resize
   useEffect(() => {
     window.addEventListener('resize', updateIndicator);
     return () => window.removeEventListener('resize', updateIndicator);
   }, [updateIndicator]);
 
   const roleBadges = {
-    admin: { label: 'Admin', cls: 'text-purple-700' },
-    api_owner: { label: 'API Owner', cls: 'text-emerald-700' },
-    consumer: { label: 'Consumer', cls: 'text-sky-700' },
+    admin: { label: 'Admin', cls: 'text-purple-700 dark:text-purple-400' },
+    api_owner: { label: 'API Owner', cls: 'text-emerald-700 dark:text-emerald-400' },
+    consumer: { label: 'Consumer', cls: 'text-sky-700 dark:text-sky-400' },
   };
   const badge = roleBadges[role] || roleBadges.consumer;
 
@@ -104,9 +100,9 @@ function TopNav({ role = 'consumer' }) {
               left: indicator.left,
               width: indicator.width,
               opacity: indicator.opacity,
-              background: '#E1E5EA',
-              boxShadow: 'inset 4px 4px 8px #b8bdc2, inset -4px -4px 8px #ffffff',
-              border: '1px solid rgba(255,255,255,0.15)',
+              background: 'var(--c-surface)',
+              boxShadow: `inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light)`,
+              border: '1px solid var(--c-border-white-faint)',
               transition: 'left 0.4s cubic-bezier(0.4, 0, 0.15, 1), width 0.35s cubic-bezier(0.4, 0, 0.15, 1), opacity 0.3s ease',
             }}
           />
@@ -132,7 +128,27 @@ function TopNav({ role = 'consumer' }) {
 
         {/* Right */}
         <div className="flex items-center gap-3 shrink-0">
-          <span className={`neu-badge px-2.5 py-1 text-xs font-semibold ${badge.cls}`}>{badge.label}</span>
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle"
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label="Toggle theme"
+          >
+            <div className="theme-toggle-knob">
+              {isDark ? (
+                <svg className="w-3.5 h-3.5 text-[#5aadca]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                <svg className="w-3.5 h-3.5 text-[#E8A642]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+            </div>
+          </button>
+
+          <span className={`neu-badge px-2.5 py-1 text-xs font-semibold ${isDark ? badge.cls.replace('text-purple-700','text-purple-400').replace('text-emerald-700','text-emerald-400').replace('text-sky-700','text-sky-400') : badge.cls}`}>{badge.label}</span>
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 neu-icon flex items-center justify-center text-[#4A97B0] text-sm font-semibold">
               {user.name?.charAt(0).toUpperCase() || '?'}
